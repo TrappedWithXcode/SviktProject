@@ -26,12 +26,12 @@ public class StudentController {
     }
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String name,@RequestParam String pwd){
-        if(studentRepository.findByNameEqualsAndPwd(name,pwd).isEmpty()){
+        if(studentRepository.findByNameEqualsAndPwdEquals(name,pwd).isEmpty()){
             HttpHeaders headers = new HttpHeaders();
             headers.add("Location","/login");
             return new ResponseEntity<>("\"redirect\": \"/login\"",headers,HttpStatus.TEMPORARY_REDIRECT);
         }
-        return new ResponseEntity<>(studentRepository.findByNameEqualsAndPwd(name,pwd).toString(), HttpStatus.OK);
+        return new ResponseEntity<>(studentRepository.findByNameEqualsAndPwdEquals(name,pwd).toString(), HttpStatus.OK);
     }
 
 }

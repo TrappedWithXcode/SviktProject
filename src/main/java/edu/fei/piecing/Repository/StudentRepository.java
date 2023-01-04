@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface StudentRepository extends CrudRepository<Student,Integer> {
-    List<Student> findByNameEqualsAndPwd(String studentName,String pwd);
+    List<Student> findByNameEqualsAndPwdEquals(String studentName,String pwd);
 }

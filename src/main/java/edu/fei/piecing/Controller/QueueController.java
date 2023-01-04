@@ -3,15 +3,12 @@ package edu.fei.piecing.Controller;
 import edu.fei.piecing.Model.Student;
 import edu.fei.piecing.Repository.StudentRepository;
 import edu.fei.piecing.Service.IStudentService;
-import edu.fei.piecing.Service.Lifo;
+import edu.fei.piecing.Service.Fifo;
 
-import edu.fei.piecing.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/queue")
@@ -28,10 +25,10 @@ public class QueueController {
 
 
 
-    Lifo lifo = new Lifo();
+    Fifo fifo = new Fifo();
 
     @GetMapping ResponseEntity<String> getQueue(){
-        return new ResponseEntity<String>(lifo.getStringStack(),HttpStatus.OK);
+        return new ResponseEntity<>(fifo.getStringStack(),HttpStatus.OK);
     }
     @PostMapping("/add")
     ResponseEntity<String> addToStack(@RequestParam("id")Integer id){
@@ -43,7 +40,7 @@ public class QueueController {
         queuecurrentnum += 1;
         student.setQueue(queuecurrentnum);
         studentRepository.save(student);
-        lifo.addToStack(id);
+        fifo.addToStack(id);
         return new ResponseEntity<>("User Added to queue",HttpStatus.CREATED);
     }
     @GetMapping("/getQueueNum")
@@ -62,18 +59,18 @@ public class QueueController {
         Student student = studref.get();
 
 
-        return new ResponseEntity<String>(studentRepository.findById(id).toString(),HttpStatus.OK);
+        return new ResponseEntity<>(studentRepository.findById(id).toString(),HttpStatus.OK);
     }
     @GetMapping("/acceptStudent") ResponseEntity<String> acceptStudent(){
-        if(lifo.isEmpty()){
-            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        if(fifo.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        var studId = lifo.popFromStack();
+        var studId = fifo.popFromStack();
 
         var studRef = iStudentService.findById(studId);
 
         Student student = studRef.get();
         student.setQueue(null);
-        return  new ResponseEntity<String>(student.toString(),HttpStatus.ACCEPTED);
+        return  new ResponseEntity<>(student.toString(),HttpStatus.ACCEPTED);
     }
 }

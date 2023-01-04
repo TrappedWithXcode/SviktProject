@@ -1,14 +1,11 @@
 package edu.fei.piecing.Service;
 
 
-import edu.fei.piecing.Model.Student;
-
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
-public class Lifo {
-    private Queue<Integer> stackOfPeople = new LinkedList<>();
+public class Fifo {
+    private final Queue<Integer> stackOfPeople = new LinkedList<>();
     public void addToStack(Integer id){
         stackOfPeople.add(id);
     }
