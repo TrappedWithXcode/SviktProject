@@ -3,27 +3,30 @@ package edu.fei.piecing.Service;
 
 import edu.fei.piecing.Model.Student;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class Lifo {
-    private Stack<Integer> stackOfPeople = new Stack<>();
-    public void pushToStack(Integer id){
-        stackOfPeople.push(id);
+    private Queue<Integer> stackOfPeople = new LinkedList<>();
+    public void addToStack(Integer id){
+        stackOfPeople.add(id);
     }
-    public void popFromStack(){
-        stackOfPeople.pop();
+    public Integer popFromStack(){
+        return stackOfPeople.poll();
     }
-    public Stack<Integer> getStack(){
+    public Queue<Integer> getStack(){
         return stackOfPeople;
     }
     public Integer getFirst(){
         return stackOfPeople.peek();
     }
-    public Integer getIndex(Integer id){
-        return stackOfPeople.indexOf(id);
-    }
+
     public String getStringStack(){
         return stackOfPeople.toString();
+    }
+    public boolean isEmpty(){
+        return stackOfPeople.isEmpty();
     }
 
 }
