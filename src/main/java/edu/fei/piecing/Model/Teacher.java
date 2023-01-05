@@ -3,7 +3,7 @@ package edu.fei.piecing.Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Teacher")
+@Table(name = "teacher")
 public class Teacher {
     @Id
     @GeneratedValue
@@ -15,7 +15,7 @@ public class Teacher {
     @Column(name = "Hash")
     private String pwd;
 
-    @Column(name = "queueNum",unique = true)
+    @Column(name = "queueNum")
     private Integer queueNum;
 
     public Integer getUid() {
