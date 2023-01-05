@@ -11,3 +11,4 @@ class PiecingApplicationTests {
     }
 
 }
+// Annotation, Spring Boot provides a convenient way to start up an application context to be used in a test.
